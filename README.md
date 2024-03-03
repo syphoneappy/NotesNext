@@ -64,6 +64,86 @@ python manage.py runserver
 gunicorn backend.wsgi:application
 ```
 
+### Deploying Django Application on Azure VM:
+
+1. **Create an Azure VM:**
+   - Log in to the Azure Portal.
+   - Click on "Create a resource" and search for "Virtual Machine".
+   - Follow the prompts to create a new VM, choosing the appropriate size, region, and OS (e.g., Ubuntu).
+   - Make sure to allow inbound traffic to ports 80 (HTTP) and 443 (HTTPS) in the networking settings.
+
+2. **Connect to the VM:**
+   - Once the VM is created, connect to it using SSH or RDP, depending on the OS.
+   - Install necessary dependencies such as Python, pip, and virtualenv.
+
+3. **Clone Your Django Project:**
+   - Clone your Django project from your Git repository onto the VM.
+   - Navigate to the project directory.
+
+4. **Install Dependencies:**
+   - Create a virtual environment: `virtualenv venv`.
+   - Activate the virtual environment: `source venv/bin/activate`.
+   - Install Python dependencies: `pip install -r requirements.txt`.
+
+5. **Configure Django Settings:**
+   - Update database settings, static files, and other configurations in `settings.py`.
+   - Set `DEBUG=False` for production.
+
+6. **Run Migrations:**
+   - Run Django migrations to apply database changes: `python manage.py migrate`.
+
+7. **Collect Static Files:**
+   - Collect static files into one directory: `python manage.py collectstatic`.
+
+8. **Set Up Web Server:**
+   - Configure a web server like Nginx or Apache to serve the Django application (Recommended Nginx).
+   - Create a virtual host configuration file and point it to your Django project's `wsgi.py` file and also configure gunicorn.
+   - Enable the virtual host and restart the web server.
+
+9. **Set Up Domain and SSL (Optional):**
+   - Configure a domain name for your VM and set up SSL certificates using Let's Encrypt or Azure SSL use 3rd party ssl service for certificate.
+
+10. **Test Your Application:**
+    - Access your Django application through the domain name or public IP address of the VM.
+    - Make sure everything is working as expected.
+
+### Deploying Next.js Frontend on Azure Functions:
+
+1. **Create an Azure Function App:**
+   - Log in to the Azure Portal.
+   - Click on "Create a resource" and search for "Function App".
+   - Follow the prompts to create a new Function App, choosing the appropriate settings like runtime stack and region.
+
+2. **Set Up Deployment Source:**
+   - Connect your Function App to a Git repository where your Next.js frontend code resides.
+   - Configure continuous deployment so that changes are automatically deployed when you push to the repository.
+
+3. **Create Azure Functions:**
+   - Define Azure Functions for each route or API endpoint in your Next.js application.
+   - at this time update the BaseUrl in nextjs app to the django server ipaddress and update cors_origin. 
+   - Use the appropriate trigger type and language (e.g., HTTP trigger for API endpoints).
+
+4. **Install Dependencies:**
+   - Set up a `package.json` file in your Function App with the necessary dependencies for your Next.js application.
+   - Install dependencies using `npm install`.
+
+5. **Build Your Next.js Application:**
+   - Run the build command to generate the production build of your Next.js application: `npm run build`.
+
+6. **Configure Azure Functions:**
+   - Set up routing and handling for incoming requests in your Azure Functions based on your Next.js application's routes.
+
+7. **Test Your Frontend:**
+   - Access your Next.js frontend through the URL provided by the Azure Function App.
+   - Ensure that all pages, components, and API endpoints are functioning correctly.
+
+8. **Monitoring and Scaling:**
+   - Set up monitoring and logging for your Azure Function App to track performance and errors.
+   - Configure auto-scaling rules to handle varying levels of traffic efficiently.
+
+By following these steps, I have successfully deployed Django application on an Azure VM and Next.js frontend on Azure Functions. 
+
+
 **User Authentication API**
 
 This API provides secure endpoints for user registration, login, logout, and retrieving current user information. It leverages well-established Django REST Framework components and adheres to security best practices.
