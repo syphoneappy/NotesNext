@@ -27,7 +27,6 @@ source backend_env/bin/activate  # Windows: backend_env\Scripts\activate.bat
 
 ```
 Django==4.3.3
-# Add other dependencies here
 ```
 
 - Install dependencies using pip:
