@@ -1,3 +1,71 @@
+**Installing and Running Application**
+
+This guide details the necessary steps to install dependencies, set up your Django backend application, and run it:
+
+**1. Setting Up Your Environment:**
+
+**Prerequisites:**
+
+- **Python (version 3.10 or later):** Download and install it from [https://www.python.org/downloads/](https://www.python.org/downloads/) if not already installed. You can verify its presence by running `python --version` in a terminal.
+- **pip (Python package manager):** This is usually bundled with Python. Run `pip --version` in the terminal to check. If not available, follow Python installation instructions.
+
+**Optional: Using a virtual environment:**
+
+Creating a virtual environment is highly recommended to isolate project dependencies and avoid conflicts with other Python installations:
+
+```bash
+python3 -m venv backend_env  # Replace 'backend_env' with your desired name
+source backend_env/bin/activate  # Windows: backend_env\Scripts\activate.bat
+```
+
+**2. Installing Dependencies:**
+
+**Using `requirements.txt`:**
+
+- Create a file named `requirements.txt` in your project directory.
+- List all required dependencies and versions:
+
+```
+Django==4.3.3
+# Add other dependencies here
+```
+
+- Install dependencies using pip:
+
+```bash
+pip install -r requirements.txt
+```
+
+**Using pip directly:**
+
+Alternatively, you can install them directly:
+
+```bash
+pip install Django==4.3.3  # Adjust versions as needed
+# Add other dependencies here
+```
+
+**4. Running the Development Server:**
+
+**Using the built-in development server (not recommended for production):**
+
+- Start the server:
+
+```bash
+python manage.py runserver
+```
+
+- Access the development server at http://127.0.0.1:8000/ in your web browser.
+
+**Using Gunicorn (recommended for production):**
+
+- Configure Gunicorn in a production environment (e.g., WSGI configuration).
+- Run it with the following command:
+
+```bash
+gunicorn backend.wsgi:application
+```
+
 **User Authentication API**
 
 This API provides secure endpoints for user registration, login, logout, and retrieving current user information. It leverages well-established Django REST Framework components and adheres to security best practices.
