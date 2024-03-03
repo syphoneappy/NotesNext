@@ -41,7 +41,6 @@ Alternatively, you can install them directly:
 
 ```bash
 pip install Django==4.3.3  # Adjust versions as needed
-# Add other dependencies here
 ```
 
 **4. Running the Development Server:**
